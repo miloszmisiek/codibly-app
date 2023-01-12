@@ -30,7 +30,7 @@ const Paginate: React.FC = () => {
     );
   }
   return (
-    <Col sm={12}>
+    <Col className="m-auto" sm={12} lg={9}>
       <MyPagination>
         <Pagination.Prev
           disabled={active <= 1}

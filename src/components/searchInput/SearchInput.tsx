@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Form from "react-bootstrap/Form";
-import { useMatch, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { productsActions } from "../../store/products-slice";
@@ -15,8 +15,6 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 const SearchInput: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
-  const match = useMatch("/id/:id");
-  const query = useSelector((state: RootState) => state.products.query);
   const min = useSelector((state: RootState) => state.products.options.min);
   const max = useSelector((state: RootState) => state.products.options.max);
 
@@ -44,19 +42,6 @@ const SearchInput: React.FC = () => {
 
   const active = useSelector((state: RootState) => state.products.active);
   const { id } = useParams();
-
-  // function submitHandler(values) {
-  //   const enteredText = values.searchFilter;
-
-  //   if (enteredText.trim().length === 0) {
-  //     // throw an error
-  //     navigate("/page/" + active);
-  //     dispatch(productsActions.changeQuery(""));
-  //   } else {
-  //     dispatch(productsActions.changeQuery(enteredText));
-  //     navigate("/id/" + enteredText);
-  //   }
-  // }
 
   useEffect(() => {
     dispatch(fetchProductsOptions());

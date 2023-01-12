@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const MyPagination = styled(Pagination)`
   justify-content: flex-end;
+  margin-left: auto;
 
   a {
     border: none;
@@ -16,7 +17,7 @@ export const MyPagination = styled(Pagination)`
       background-color: transparent;
     }
   }
-  .active>.page-link {
+  .active > .page-link {
     background-color: transparent !important;
     border: none !important;
     color: #0d6efd;
@@ -28,14 +29,17 @@ export const MyPagination = styled(Pagination)`
     position: relative;
   }
 
-  .active>.page-link::before {
-    content: '_';
+  .active > .page-link::before {
+    content: "_";
     display: inline-block;
     position: absolute;
     bottom: -0.1em;
     left: 0;
     text-align: center;
     width: 100%;
-}
+  }
 
+  .disabled>.page-link {
+    color: transparent !important;
+  }
 `;
