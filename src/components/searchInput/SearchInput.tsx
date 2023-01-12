@@ -74,29 +74,36 @@ const SearchInput: React.FC = () => {
   return (
     <Col className="m-auto" xs={5} sm={4} lg={3}>
       <Form onSubmit={formik.handleSubmit}>
-        <InputGroup className="mt-4">
-          <FormInput
-            type="number"
-            name="searchFilter"
-            placeholder="Enter ID"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.searchFilter}
-            $isError={formik.touched.searchFilter && formik.errors.searchFilter}
-            aria-label="Recipient's username"
-            aria-describedby="basic-addon2"
-          />
-          <FormButton
-            variant="outline-secondary"
-            id="button-addon2"
-            type="submit"
-          >
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </FormButton>
-        </InputGroup>
-        {formik.touched.searchFilter && formik.errors.searchFilter ? (
-          <ErrorMessage>{formik.errors.searchFilter}</ErrorMessage>
-        ) : null}
+        <FormGroup>
+          <InputGroup className="mt-4">
+            <FormInput
+              type="number"
+              name="searchFilter"
+              placeholder="Enter ID"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.searchFilter}
+              $isError={
+                formik.touched.searchFilter && formik.errors.searchFilter
+              }
+              aria-label="Recipient's username"
+              aria-describedby="basic-addon2"
+            />
+            <FormButton
+              variant="outline-secondary"
+              id="button-addon2"
+              type="submit"
+              $isError={
+                formik.touched.searchFilter && formik.errors.searchFilter
+              }
+            >
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </FormButton>
+          </InputGroup>
+          {formik.touched.searchFilter && formik.errors.searchFilter ? (
+            <ErrorMessage>{formik.errors.searchFilter}</ErrorMessage>
+          ) : null}
+        </FormGroup>
       </Form>
     </Col>
   );

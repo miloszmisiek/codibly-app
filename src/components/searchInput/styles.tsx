@@ -1,4 +1,4 @@
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, InputGroup } from "react-bootstrap";
 import styled from "styled-components";
 
 interface FormInputProps {
@@ -9,7 +9,7 @@ export const MyForm = styled(Form)`
 
 `;
 
-export const FormGroup = styled(Form.Group)`
+export const FormGroup = styled(InputGroup)`
   position: relative;
 `;
 export const ErrorMessage = styled.p`
@@ -53,6 +53,7 @@ export const FormInput = styled(Form.Control)<FormInputProps>`
   }
 `;
 
-export const FormButton = styled(Button)`
-  /* margin-top: 2rem; */
+export const FormButton = styled(Button)<FormInputProps>`
+  border-color: ${(props) => (props.$isError ? "red" : "inherit")};
+  animation: ${(props) => (props.$isError ? "skew-x-shake 1.3s" : undefined)};
 `;
