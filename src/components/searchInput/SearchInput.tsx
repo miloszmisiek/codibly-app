@@ -1,64 +1,104 @@
-import {useEffect, useRef } from "react";
-import Button from "react-bootstrap/Button";
+import { useEffect } from "react";
 import Form from "react-bootstrap/Form";
-import { useNavigate, useParams } from "react-router-dom";
+import { useMatch, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { productsActions } from "../../store/products-slice";
 import { fetchProductsOptions } from "../../store/products-actions";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { ErrorMessage, FormButton, FormGroup, FormInput } from "./styles";
+import { Col, InputGroup } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const SearchInput: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
-
-  const active = useSelector((state: RootState) => state.products.active);
+  const match = useMatch("/id/:id");
+  const query = useSelector((state: RootState) => state.products.query);
   const min = useSelector((state: RootState) => state.products.options.min);
   const max = useSelector((state: RootState) => state.products.options.max);
 
-  const queryInputRef = useRef<HTMLInputElement>(null);
+  const formik = useFormik<{ searchFilter: string }>({
+    initialValues: {
+      searchFilter: "",
+    },
+    validationSchema: Yup.object({
+      searchFilter: Yup.number()
+        .max(max, `Must not be more than ${max}`)
+        .min(min, `Must not be less than ${min}`),
+    }),
+    onSubmit: (values): void => {
+      const enteredText = values.searchFilter.toString();
+
+      if (enteredText.trim().length === 0) {
+        navigate("/page/" + active);
+        dispatch(productsActions.changeQuery(""));
+      } else {
+        dispatch(productsActions.changeQuery(enteredText));
+        navigate("/id/" + enteredText);
+      }
+    },
+  });
+
+  const active = useSelector((state: RootState) => state.products.active);
   const { id } = useParams();
 
-  const submitHandler = (e: React.FormEvent) => {
-    e.preventDefault();
-    const enteredText = queryInputRef.current!.value;
+  // function submitHandler(values) {
+  //   const enteredText = values.searchFilter;
 
-    if (enteredText.trim().length === 0) {
-      // throw an error
-      navigate("/page/" + active);
-      dispatch(productsActions.changeQuery(""));
-    } else {
-      dispatch(productsActions.changeQuery(enteredText));
-      navigate("/id/" + enteredText);
-    }
-  };
+  //   if (enteredText.trim().length === 0) {
+  //     // throw an error
+  //     navigate("/page/" + active);
+  //     dispatch(productsActions.changeQuery(""));
+  //   } else {
+  //     dispatch(productsActions.changeQuery(enteredText));
+  //     navigate("/id/" + enteredText);
+  //   }
+  // }
 
   useEffect(() => {
-    if (!id) {
-      queryInputRef.current!.value = "";
-      dispatch(productsActions.changeQuery(""));
-    } else {
-      queryInputRef.current!.value = id;
-    }
     dispatch(fetchProductsOptions());
   });
+
+  useEffect(() => {
+    if (!!!id) {
+      formik.values.searchFilter = "";
+      dispatch(productsActions.changeQuery(""));
+    } else {
+      formik.values.searchFilter = id;
+    }
+  }, [id]);
+
   return (
-    <>
-      <Form onSubmit={submitHandler}>
-        <Form.Group className="mb-3" controlId="search">
-          <Form.Label>ID Filter</Form.Label>
-          <Form.Control
+    <Col className="m-auto" xs={5} sm={4} lg={3}>
+      <Form onSubmit={formik.handleSubmit}>
+        <InputGroup className="mt-4">
+          <FormInput
             type="number"
-            min={min}
-            max={max}
-            placeholder="Enter id number"
-            ref={queryInputRef}
+            name="searchFilter"
+            placeholder="Enter ID"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.searchFilter}
+            $isError={formik.touched.searchFilter && formik.errors.searchFilter}
+            aria-label="Recipient's username"
+            aria-describedby="basic-addon2"
           />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
+          <FormButton
+            variant="outline-secondary"
+            id="button-addon2"
+            type="submit"
+          >
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+          </FormButton>
+        </InputGroup>
+        {formik.touched.searchFilter && formik.errors.searchFilter ? (
+          <ErrorMessage>{formik.errors.searchFilter}</ErrorMessage>
+        ) : null}
       </Form>
-    </>
+    </Col>
   );
 };
 

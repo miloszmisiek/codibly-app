@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Paginate from "../components/paginate/Paginate";
@@ -26,14 +27,22 @@ const Home: React.FC = () => {
   }, [number, id]);
 
   useEffect(() => {
-    number ? navigate("/page/" + number) : navigate("/page/" + active);
+    number
+      ? navigate("/page/" + number)
+      : id
+      ? navigate("/id/" + id)
+      : navigate("/page/" + active);
   }, []);
 
   return (
     <>
-      <SearchInput />
-      <ProductsTable />
-      {!query && <Paginate />}
+      <Row>
+        <SearchInput />
+      </Row>
+      <Row>
+        <ProductsTable />
+      </Row>
+      <Row>{!query && <Paginate />}</Row>
     </>
   );
 };
