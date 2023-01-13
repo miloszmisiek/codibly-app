@@ -44,6 +44,7 @@ const SearchInput: React.FC = () => {
         dispatch(productsActions.changeQuery(enteredText));
         navigate("/id/" + enteredText);
       }
+      formik.setTouched({}, false);
     },
   });
 
@@ -58,6 +59,7 @@ const SearchInput: React.FC = () => {
     if (!!!id) {
       formik.values.searchFilter = "";
       dispatch(productsActions.changeQuery(""));
+      formik.setTouched({}, false);
     } else {
       formik.values.searchFilter = id;
     }
