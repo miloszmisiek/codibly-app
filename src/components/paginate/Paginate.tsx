@@ -1,3 +1,5 @@
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Pagination } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -30,7 +32,7 @@ const Paginate: React.FC = () => {
     );
   }
   return (
-    <Col className="m-auto" sm={12} lg={9}>
+    <Col className="m-auto" sm={12}>
       <MyPagination>
         <Pagination.Prev
           disabled={active <= 1}
@@ -40,7 +42,9 @@ const Paginate: React.FC = () => {
               navigate("/page/" + (active - 1));
             }
           }}
-        />
+        >
+                    <FontAwesomeIcon icon={faChevronLeft} />
+        </Pagination.Prev>
         {pages}
         <Pagination.Next
           disabled={active >= totalPages}
@@ -50,7 +54,9 @@ const Paginate: React.FC = () => {
               navigate("/page/" + (active + 1));
             }
           }}
-        />
+        >
+          <FontAwesomeIcon icon={faChevronRight} />
+        </Pagination.Next>
       </MyPagination>
     </Col>
   );

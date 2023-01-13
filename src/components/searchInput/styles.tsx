@@ -5,12 +5,13 @@ interface FormInputProps {
   readonly isError: boolean;
 }
 
-export const MyForm = styled(Form)`
-
-`;
+export const MyForm = styled(Form)``;
 
 export const FormGroup = styled(InputGroup)`
-  position: relative;
+  @media (max-width: 576px) {
+    max-width: 180px;
+    margin-left: auto;
+  }
 `;
 export const ErrorMessage = styled.p`
   color: red;
@@ -31,6 +32,19 @@ export const FormInput = styled(Form.Control)<FormInputProps>`
     box-shadow: none;
     border-color: ${(props) => (props.$isError ? "red" : "inherit")};
   }
+
+  /* Chrome, Safari, Edge, Opera */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  &[type="number"] {
+    -moz-appearance: textfield;
+  }
+
   @keyframes skew-x-shake {
     0% {
       transform: skewX(-15deg);
@@ -56,4 +70,14 @@ export const FormInput = styled(Form.Control)<FormInputProps>`
 export const FormButton = styled(Button)<FormInputProps>`
   border-color: ${(props) => (props.$isError ? "red" : "inherit")};
   animation: ${(props) => (props.$isError ? "skew-x-shake 1.3s" : undefined)};
+`;
+
+export const HomeButton = styled(Button)`
+  background-color: hsl(24 100% 65%);
+  border: none;
+  margin-top: 1.5rem;
+
+  &:hover {
+    background-color: hsl(24 100% 55%);
+  }
 `;
