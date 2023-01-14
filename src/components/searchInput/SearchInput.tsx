@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Form from "react-bootstrap/Form";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { productsActions } from "../../store/products-slice";
@@ -24,6 +24,7 @@ const SearchInput: React.FC = () => {
   const navigate = useNavigate();
   const min = useSelector((state: RootState) => state.products.options.min);
   const max = useSelector((state: RootState) => state.products.options.max);
+  const products = useSelector((state: RootState) => state.products.items);
 
   const formik = useFormik<{ searchFilter: string }>({
     initialValues: {
@@ -38,18 +39,17 @@ const SearchInput: React.FC = () => {
       const enteredText = values.searchFilter.toString();
 
       if (enteredText.trim().length === 0) {
-        navigate("/page/" + active);
+        navigate("/page/1");
         dispatch(productsActions.changeQuery(""));
       } else {
         dispatch(productsActions.changeQuery(enteredText));
-        navigate("/id/" + enteredText);
       }
       formik.setTouched({}, false);
     },
   });
 
   const active = useSelector((state: RootState) => state.products.active);
-  const { id } = useParams();
+  const { number, id } = useParams();
 
   useEffect(() => {
     dispatch(fetchProductsOptions());
@@ -70,7 +70,6 @@ const SearchInput: React.FC = () => {
       <Col className="me-auto" xs={3} sm={6} md={5} lg={3}>
         <HomeButton
           onClick={() => {
-            dispatch(productsActions.changeActive(1));
             navigate("/");
           }}
         >

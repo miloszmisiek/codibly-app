@@ -35,19 +35,20 @@ const ProductsTable: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map((item) => (
-            <MyTr
-              key={item.id}
-              color={item.color}
-              onClick={() => {
-                showModalHandler(item);
-              }}
-            >
-              <td data-label="ID">{item.id}</td>
-              <td data-label="Name">{titleCase(item.name)}</td>
-              <td data-label="Year">{item.year}</td>
-            </MyTr>
-          ))}
+          {
+            products.map((item) => (
+              <MyTr
+                key={item.id}
+                color={item.color}
+                onClick={() => {
+                  showModalHandler(item);
+                }}
+              >
+                <td data-label="ID">{item.id}</td>
+                <td data-label="Name">{titleCase(item?.name)}</td>
+                <td data-label="Year">{item.year}</td>
+              </MyTr>
+            ))}
         </tbody>
       </MyTable>
     </ColTable>

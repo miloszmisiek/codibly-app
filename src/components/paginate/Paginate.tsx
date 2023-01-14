@@ -24,7 +24,7 @@ const Paginate: React.FC = () => {
         active={number === active}
         onClick={() => {
           dispatch(productsActions.changeActive(number));
-          navigate("/page/" + number);
+          // navigate("/page/" + number);
         }}
       >
         {number}
@@ -39,7 +39,7 @@ const Paginate: React.FC = () => {
           onClick={() => {
             if (active > 1) {
               dispatch(productsActions.changeActive(active - 1));
-              navigate("/page/" + (active - 1));
+              // navigate("/page/" + (active - 1));
             }
           }}
         >
@@ -51,7 +51,7 @@ const Paginate: React.FC = () => {
           onClick={() => {
             if (active < totalPages) {
               dispatch(productsActions.changeActive(active + 1));
-              navigate("/page/" + (active + 1));
+              // navigate("/page/" + (active + 1));
             }
           }}
         >

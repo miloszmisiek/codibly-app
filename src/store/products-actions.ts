@@ -12,7 +12,6 @@ export const fetchProductsData = () => {
       const response = await fetch(
         `https://reqres.in/api/products/?page=${active}&per_page=5&id=${query}`
       );
-
       if (!response.ok) {
         throw new Error("Could not fetch products data!");
       }
@@ -29,10 +28,13 @@ export const fetchProductsData = () => {
         productsActions.replaceProducts({
           items: productData.data.length
             ? productData.data
-            : [productData.data],
+            : !Array.isArray(productData.data)
+            ? [productData.data]
+            : [],
           total_pages: productData.total_pages,
         })
       );
+      dispatch(productsActions.loaded());
     } catch (error) {
       console.log(error);
     }

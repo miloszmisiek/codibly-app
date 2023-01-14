@@ -9,14 +9,15 @@ type ProductContextObj = {
     totalPages: number;
     min: number;
     max: number;
+    hasLoaded: boolean;
   };
 };
 
 const initialProductsState: ProductContextObj = {
   items: [],
-  active: 1,
+  active: 0,
   query: "",
-  options: { totalPages: 1, min: 1, max: 0 },
+  options: { totalPages: 0, min: 1, max: 0, hasLoaded: false },
 };
 
 const productsSlice = createSlice({
@@ -36,6 +37,12 @@ const productsSlice = createSlice({
     changeMinMax(state, action) {
       state.options.min = action.payload.min;
       state.options.max = action.payload.max;
+    },
+    notLoaded(state) {
+      state.options.hasLoaded = false;
+    },
+    loaded(state) {
+      state.options.hasLoaded = true;
     },
   },
 });
