@@ -75,7 +75,7 @@ const ProductsTable: React.FC = () => {
           ) : (
             <>
               <ImageBorder>
-                <img src={Dead} height="100"></img>
+                <img src={Dead}></img>
               </ImageBorder>
               <WrongMessage>Ups... Something went wrong!</WrongMessage>
             </>

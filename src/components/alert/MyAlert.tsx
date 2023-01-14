@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import Alert from "react-bootstrap/Alert";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { alertActions } from "../../store/alert-slice";
+import { AlertCustom } from "./styles";
 
 const MyAlert: React.FC = () => {
   const show = useSelector((state: RootState) => state.alert.show);
@@ -18,9 +18,9 @@ const MyAlert: React.FC = () => {
   }, []);
 
   return (
-    <Alert show={show} variant={variant}>
+    <AlertCustom show={show} variant={variant}>
       {message}
-    </Alert>
+    </AlertCustom>
   );
 };
 

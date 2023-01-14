@@ -2,13 +2,6 @@ import { Modal } from "react-bootstrap";
 import styled from "styled-components";
 
 export const ModalCustom = styled(Modal)`
-  /* @media (max-width: 576px) {
-    .modal-dialog {
-      display: flex;
-      align-items: center;
-      min-height: calc(100% - 0.5rem * 2);
-    }
-  } */
 `;
 
 export const ModalHeader = styled(Modal.Header)`

@@ -2,6 +2,7 @@ import { Container } from "react-bootstrap";
 import styled from "styled-components";
 
 export const MainContainer = styled(Container)`
+  position: relative;
   background: rgba(247, 247, 249, 1);
   border-radius: 1rem;
   /* height: 336px; */
@@ -17,6 +18,7 @@ export const MainContainer = styled(Container)`
   }
 
   @media (max-width: 576px) {
-    padding: 0 1rem;
+    padding: 1rem;
+    min-height: auto;
   }
 `;

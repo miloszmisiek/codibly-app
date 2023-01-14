@@ -102,10 +102,27 @@ export const ImageBorder = styled.div`
   padding: 4rem;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+
+  img {
+    height: 100px;
+  }
+
+  @media screen and (max-width: 576px) {
+    img {
+      height: 40px;
+    }
+
+    padding: 2rem;
+  }
 `;
 
 export const WrongMessage = styled.p`
   font-family: "Caveat", cursive;
   margin: 1rem auto;
   font-size: 2rem;
+
+  @media screen and (max-width: 576px) {
+    font-size: 1.5rem;
+    text-align: center;
+  }
 `;
