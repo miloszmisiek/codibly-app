@@ -6,6 +6,7 @@ import NotFoundPage from "./views/NotFoundPage";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "./store";
+import MyAlert from "./components/alert/MyAlert";
 
 function App() {
   const totalPages = useSelector(
@@ -13,6 +14,7 @@ function App() {
   );
   return (
     <MainContainer>
+      <MyAlert />
       <MyModal />
       <BrowserRouter>
         <Routes>

@@ -3,6 +3,7 @@ import { productsActions } from "./products-slice";
 
 import store from ".";
 import Product from "../models/product";
+import { alertActions } from "./alert-slice";
 
 export const fetchProductsData = () => {
   return async (dispatch: AppDispatch) => {
@@ -13,8 +14,12 @@ export const fetchProductsData = () => {
         `https://reqres.in/api/products/?page=${active}&per_page=5&id=${query}`
       );
       if (!response.ok) {
+        dispatch(alertActions.setMessage("Could not fetch products data!"));
+        dispatch(alertActions.setVariant("danger"));
+        dispatch(alertActions.handleShow());
+
         throw new Error("Could not fetch products data!");
-      }
+      } 
 
       const data = await response.json();
 
