@@ -37,7 +37,6 @@ const ProductsTable: React.FC = () => {
 
   useEffect(() => {
     if (loaded || responseOK) {
-      console.log("fetched products data");
       dispatch(fetchProductsData());
     }
   }, [active, query, dispatch, loaded, responseOK]);
