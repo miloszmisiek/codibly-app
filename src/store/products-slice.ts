@@ -10,6 +10,7 @@ type ProductContextObj = {
     min: number;
     max: number;
     hasLoaded: boolean;
+    responseOk: boolean;
   };
 };
 
@@ -17,7 +18,13 @@ const initialProductsState: ProductContextObj = {
   items: [],
   active: 0,
   query: "",
-  options: { totalPages: 0, min: 1, max: 0, hasLoaded: false },
+  options: {
+    totalPages: 0,
+    min: 1,
+    max: 0,
+    hasLoaded: false,
+    responseOk: true,
+  },
 };
 
 const productsSlice = createSlice({
@@ -43,6 +50,12 @@ const productsSlice = createSlice({
     },
     loaded(state) {
       state.options.hasLoaded = true;
+    },
+    responseOK(state) {
+      state.options.responseOk = true;
+    },
+    responseNOT(state) {
+      state.options.responseOk = false;
     },
   },
 });

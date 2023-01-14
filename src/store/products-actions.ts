@@ -11,15 +11,23 @@ export const fetchProductsData = () => {
     const query = store.getState().products.query;
     const fetchData = async () => {
       const response = await fetch(
-        `https://reqres.in/api/products/?page=${active}&per_page=5&id=${query}`
+        `https://reqres.in/api/products/?page=${
+          active ? active : 1
+        }&per_page=5&id=${query ? query : ""}`
+        // `https://reqres.in/api/produ/adasd/sdadas`
       );
       if (!response.ok) {
-        dispatch(alertActions.setMessage("Could not fetch products data!"));
+        dispatch(productsActions.responseNOT());
+        dispatch(
+          alertActions.setMessage(
+            "Something went wrong! Could not fetch products data!"
+          )
+        );
         dispatch(alertActions.setVariant("danger"));
         dispatch(alertActions.handleShow());
 
         throw new Error("Could not fetch products data!");
-      } 
+      }
 
       const data = await response.json();
 
@@ -41,7 +49,15 @@ export const fetchProductsData = () => {
       );
       dispatch(productsActions.loaded());
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      dispatch(productsActions.responseNOT());
+      dispatch(
+        alertActions.setMessage(
+          "Something went wrong! Could not fetch products data!"
+        )
+      );
+      dispatch(alertActions.setVariant("danger"));
+      dispatch(alertActions.handleShow());
     }
   };
 };
@@ -51,9 +67,19 @@ export const fetchProductsOptions = () => {
     const fetchData = async () => {
       const response = await fetch(
         "https://reqres.in/api/products/?per_page=99999999"
+        // "https://reqres.in/api/products//asdasda/dasdasd"
       );
 
       if (!response.ok) {
+        dispatch(productsActions.notLoaded());
+        dispatch(productsActions.responseNOT());
+        dispatch(
+          alertActions.setMessage(
+            "Something went wrong! Could not fetch products options!"
+          )
+        );
+        dispatch(alertActions.setVariant("danger"));
+        dispatch(alertActions.handleShow());
         throw new Error("Could not fetch products options!");
       }
 

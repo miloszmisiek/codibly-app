@@ -1,11 +1,14 @@
 import { useEffect } from "react";
 import Form from "react-bootstrap/Form";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  useMatch,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { productsActions } from "../../store/products-slice";
 import { fetchProductsOptions } from "../../store/products-actions";
-import { NavLink } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
@@ -20,11 +23,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const SearchInput: React.FC = () => {
+  const { id } = useParams();
   const dispatch: AppDispatch = useDispatch();
+  const match = useMatch("/page/1");
   const navigate = useNavigate();
   const min = useSelector((state: RootState) => state.products.options.min);
   const max = useSelector((state: RootState) => state.products.options.max);
-  const products = useSelector((state: RootState) => state.products.items);
+  const responseOk = useSelector(
+    (state: RootState) => state.products.options.responseOk
+  );
+  const loaded = useSelector(
+    (state: RootState) => state.products.options.hasLoaded
+  );
 
   const formik = useFormik<{ searchFilter: string }>({
     initialValues: {
@@ -39,21 +49,23 @@ const SearchInput: React.FC = () => {
       const enteredText = values.searchFilter.toString();
 
       if (enteredText.trim().length === 0) {
-        navigate("/page/1");
-        dispatch(productsActions.changeQuery(""));
+        if (id) {
+          dispatch(productsActions.notLoaded());
+          navigate("/page/1");
+          dispatch(productsActions.changeActive(1));
+          dispatch(productsActions.changeQuery(""));
+        }
       } else {
+        dispatch(productsActions.notLoaded());
         dispatch(productsActions.changeQuery(enteredText));
       }
       formik.setTouched({}, false);
     },
   });
 
-  const active = useSelector((state: RootState) => state.products.active);
-  const { number, id } = useParams();
-
   useEffect(() => {
-    dispatch(fetchProductsOptions());
-  });
+    responseOk && dispatch(fetchProductsOptions());
+  }, [responseOk, loaded]);
 
   useEffect(() => {
     if (!!!id) {
@@ -70,45 +82,50 @@ const SearchInput: React.FC = () => {
       <Col className="me-auto" xs={3} sm={6} md={5} lg={3}>
         <HomeButton
           onClick={() => {
-            navigate("/");
+            if (!match) {
+              dispatch(productsActions.changeActive(1));
+              navigate("/");
+            }
           }}
         >
           <FontAwesomeIcon icon={faHome} />
         </HomeButton>
       </Col>
       <Col className="ms-auto" xs={9} sm={6} md={5} lg={3}>
-        <Form onSubmit={formik.handleSubmit}>
-          <FormGroup>
-            <InputGroup className="mt-4">
-              <FormInput
-                type="number"
-                name="searchFilter"
-                placeholder="Enter ID"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.searchFilter}
-                $isError={
-                  formik.touched.searchFilter && formik.errors.searchFilter
-                }
-                aria-label="Recipient's username"
-                aria-describedby="basic-addon2"
-              />
-              <FormButton
-                variant="outline-secondary"
-                id="button-addon2"
-                type="submit"
-                $isError={
-                  formik.touched.searchFilter && formik.errors.searchFilter
-                }
-              >
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
-              </FormButton>
-            </InputGroup>
-            {formik.touched.searchFilter && formik.errors.searchFilter ? (
-              <ErrorMessage>{formik.errors.searchFilter}</ErrorMessage>
-            ) : null}
-          </FormGroup>
-        </Form>
+        {loaded && responseOk && (
+          <Form onSubmit={formik.handleSubmit}>
+            <FormGroup>
+              <InputGroup className="mt-4">
+                <FormInput
+                  type="number"
+                  name="searchFilter"
+                  placeholder="Enter ID"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.searchFilter}
+                  $isError={
+                    formik.touched.searchFilter && formik.errors.searchFilter
+                  }
+                  aria-label="Recipient's username"
+                  aria-describedby="basic-addon2"
+                />
+                <FormButton
+                  variant="outline-secondary"
+                  id="button-addon2"
+                  type="submit"
+                  $isError={
+                    formik.touched.searchFilter && formik.errors.searchFilter
+                  }
+                >
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </FormButton>
+              </InputGroup>
+              {formik.touched.searchFilter && formik.errors.searchFilter ? (
+                <ErrorMessage>{formik.errors.searchFilter}</ErrorMessage>
+              ) : null}
+            </FormGroup>
+          </Form>
+        )}
       </Col>
     </>
   );

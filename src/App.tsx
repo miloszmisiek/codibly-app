@@ -12,9 +12,10 @@ function App() {
   const totalPages = useSelector(
     (state: RootState) => state.products.options.totalPages
   );
+  const show = useSelector((state: RootState) => state.alert.show);
   return (
     <MainContainer>
-      <MyAlert />
+      {show && <MyAlert />}
       <MyModal />
       <BrowserRouter>
         <Routes>

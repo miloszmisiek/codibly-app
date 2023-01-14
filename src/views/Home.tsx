@@ -23,6 +23,9 @@ const Home: React.FC<{ totalPages: number }> = (props) => {
   const query = useSelector((state: RootState) => state.products.query);
   const max = useSelector((state: RootState) => state.products.options.max);
   const min = useSelector((state: RootState) => state.products.options.min);
+  const responseOK = useSelector(
+    (state: RootState) => state.products.options.responseOk
+  );
   const loaded = useSelector(
     (state: RootState) => state.products.options.hasLoaded
   );
@@ -30,10 +33,6 @@ const Home: React.FC<{ totalPages: number }> = (props) => {
   const { number, id } = useParams();
 
   const location = useLocation();
-
-  // window.onpopstate = () => {
-  //   dispatch(productsActions.notLoaded());
-  // };
 
   useEffect(() => {
     if (match && !match1) {
@@ -66,6 +65,9 @@ const Home: React.FC<{ totalPages: number }> = (props) => {
       if (numNOT || idNOT) {
         navigate("/404-not-found", { replace: true });
       }
+      if ((number && !!!parseInt(number!)) || (id && !!!parseInt(id!))) {
+        navigate("/404-not-found", { replace: true });
+      }
     }
   }, [loaded]);
   useEffect(() => {
@@ -94,7 +96,7 @@ const Home: React.FC<{ totalPages: number }> = (props) => {
       <Row>
         <ProductsTable />
       </Row>
-      <Row>{!query && <Paginate />}</Row>{" "}
+      <Row>{!query && loaded && responseOK && <Paginate />}</Row>{" "}
     </>
   );
 };

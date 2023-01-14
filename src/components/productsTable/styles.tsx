@@ -77,3 +77,35 @@ export const MyTr = styled.tr`
   background-color: ${(props) => props.color} !important;
   cursor: pointer;
 `;
+
+export const SpinnerWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 350px;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .spinner-border {
+    --bs-spinner-width: 6rem;
+    --bs-spinner-height: 6rem;
+  }
+`;
+
+export const ImageBorder = styled.div`
+  width: max-content;
+  height: max-content;
+  border: 0.3rem solid hsl(24 100% 65%);
+  border-radius: 50%;
+  padding: 4rem;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+`;
+
+export const WrongMessage = styled.p`
+  font-family: "Caveat", cursive;
+  margin: 1rem auto;
+  font-size: 2rem;
+`;

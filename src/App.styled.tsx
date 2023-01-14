@@ -6,7 +6,7 @@ export const MainContainer = styled(Container)`
   border-radius: 1rem;
   /* height: 336px; */
   /* max-width: 600px; */
-  /* min-height: 50vh; */
+  min-height: 500px;
   display: flex;
   justify-content: center;
   flex-direction: column;

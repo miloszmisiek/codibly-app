@@ -76,6 +76,8 @@ export const HomeButton = styled(Button)`
   background-color: hsl(24 100% 65%);
   border: none;
   margin-top: 1.5rem;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 
   &:hover {
     background-color: hsl(24 100% 55%);
