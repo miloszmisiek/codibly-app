@@ -1,10 +1,6 @@
 import { useEffect } from "react";
 import Form from "react-bootstrap/Form";
-import {
-  useMatch,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { productsActions } from "../../store/products-slice";
@@ -16,16 +12,14 @@ import {
   FormButton,
   FormGroup,
   FormInput,
-  HomeButton,
 } from "./styles";
-import { Button, Col, InputGroup } from "react-bootstrap";
+import { Col, InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const SearchInput: React.FC = () => {
   const { id } = useParams();
   const dispatch: AppDispatch = useDispatch();
-  const match = useMatch("/page/1");
   const navigate = useNavigate();
   const min = useSelector((state: RootState) => state.products.options.min);
   const max = useSelector((state: RootState) => state.products.options.max);
@@ -51,46 +45,25 @@ const SearchInput: React.FC = () => {
       if (enteredText.trim().length === 0) {
         if (id) {
           dispatch(productsActions.notLoaded());
-          navigate("/page/1");
-          dispatch(productsActions.changeActive(1));
-          dispatch(productsActions.changeQuery(""));
+          navigate("/products/page/1");
         }
       } else {
         dispatch(productsActions.notLoaded());
-        dispatch(productsActions.changeQuery(enteredText));
+        navigate(`/products/${enteredText}`);
+        formik.setFieldValue("searchFilter", "");
+ 
       }
       formik.setTouched({}, false);
     },
   });
 
   useEffect(() => {
-    responseOk && dispatch(fetchProductsOptions());
-  }, [responseOk, loaded]);
+    dispatch(fetchProductsOptions());
+  }, [responseOk, loaded, dispatch]);
 
-  useEffect(() => {
-    if (!!!id) {
-      formik.values.searchFilter = "";
-      dispatch(productsActions.changeQuery(""));
-      formik.setTouched({}, false);
-    } else {
-      formik.values.searchFilter = id;
-    }
-  }, [id]);
 
   return (
     <>
-      <Col className="me-auto" xs={3} sm={6} md={5} lg={3}>
-        <HomeButton
-          onClick={() => {
-            if (!match) {
-              dispatch(productsActions.changeActive(1));
-              navigate("/");
-            }
-          }}
-        >
-          <FontAwesomeIcon icon={faHome} />
-        </HomeButton>
-      </Col>
       <Col className="ms-auto" xs={9} sm={6} md={5} lg={3}>
         {loaded && responseOk && (
           <Form onSubmit={formik.handleSubmit}>

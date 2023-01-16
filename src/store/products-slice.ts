@@ -3,7 +3,7 @@ import Product from "../models/product";
 
 type ProductContextObj = {
   items: Product[];
-  active: number;
+  active: string;
   query: string;
   options: {
     totalPages: number;
@@ -16,7 +16,7 @@ type ProductContextObj = {
 
 const initialProductsState: ProductContextObj = {
   items: [],
-  active: 0,
+  active: "",
   query: "",
   options: {
     totalPages: 0,

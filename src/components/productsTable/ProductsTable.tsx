@@ -1,11 +1,9 @@
 import { useEffect } from "react";
 import {
   ColTable,
-  ImageBorder,
   MyTable,
   MyTr,
   SpinnerWrapper,
-  WrongMessage,
 } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
@@ -15,14 +13,26 @@ import Product from "../../models/product";
 
 import { titleCase } from "../../utils/utils";
 import Spinner from "react-bootstrap/Spinner";
-import Dead from "../../assets/dead.png";
+
+import Paginate from "../paginate/Paginate";
+import { productsActions } from "../../store/products-slice";
+import {useNavigate, useParams } from "react-router-dom";
+import NotFound from "../notFound/NotFound";
 
 const ProductsTable: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
+
+  let { page, id } = useParams();
 
   const products = useSelector((state: RootState) => state.products.items);
   const active = useSelector((state: RootState) => state.products.active);
   const query = useSelector((state: RootState) => state.products.query);
+  const max = useSelector((state: RootState) => state.products.options.max);
+  const min = useSelector((state: RootState) => state.products.options.min);
+  const totalPages = useSelector(
+    (state: RootState) => state.products.options.totalPages
+  );
   const responseOK = useSelector(
     (state: RootState) => state.products.options.responseOk
   );
@@ -36,53 +46,70 @@ const ProductsTable: React.FC = () => {
   };
 
   useEffect(() => {
-    if (loaded || responseOK) {
-      dispatch(fetchProductsData());
+    if (page) {
+      dispatch(productsActions.changeActive(page));
+      dispatch(productsActions.changeQuery(""));
     }
-  }, [active, query, dispatch, loaded, responseOK]);
+    if(id) {
+      dispatch(productsActions.changeQuery(id))
+      dispatch(productsActions.changeActive(""));
+    }
+  }, [dispatch, page, id]);
+
+  useEffect(() => {
+    dispatch(fetchProductsData());
+  }, [dispatch, active, query]);
+
+  useEffect(() => {
+    if (loaded) {
+      const pageErr =
+        page && (parseInt(page) > totalPages || parseInt(page) < 0);
+      const idErr = id && (parseInt(id) < min || parseInt(id) > max);
+
+      if (pageErr || idErr) {
+        navigate("/not-found", { replace: true });
+      }
+    }
+  }, [loaded, id, max, min, navigate, page, totalPages]);
 
   return (
-    <ColTable className="m-auto" sm={12}>
-      {loaded && responseOK ? (
-        <MyTable bordered hover responsive>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Year</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.map((item) => (
-              <MyTr
-                key={item.id}
-                color={item.color}
-                onClick={() => {
-                  showModalHandler(item);
-                }}
-              >
-                <td data-label="ID">{item.id}</td>
-                <td data-label="Name">{titleCase(item?.name)}</td>
-                <td data-label="Year">{item.year}</td>
-              </MyTr>
-            ))}
-          </tbody>
-        </MyTable>
-      ) : (
-        <SpinnerWrapper>
-          {responseOK ? (
+    <>
+      <ColTable className="m-auto" sm={12}>
+        {loaded ? (
+          <MyTable bordered hover responsive>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Year</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.map((item) => (
+                <MyTr
+                  key={item.id}
+                  color={item.color}
+                  onClick={() => {
+                    showModalHandler(item);
+                  }}
+                >
+                  <td data-label="ID">{item.id}</td>
+                  <td data-label="Name">{titleCase(item?.name)}</td>
+                  <td data-label="Year">{item.year}</td>
+                </MyTr>
+              ))}
+            </tbody>
+          </MyTable>
+        ) : responseOK ? (
+          <SpinnerWrapper>
             <Spinner animation="border" variant="warning" />
-          ) : (
-            <>
-              <ImageBorder>
-                <img src={Dead}></img>
-              </ImageBorder>
-              <WrongMessage>Ups... Something went wrong!</WrongMessage>
-            </>
-          )}
-        </SpinnerWrapper>
-      )}
-    </ColTable>
+          </SpinnerWrapper>
+        ) : (
+          <NotFound />
+        )}
+      </ColTable>
+      {loaded && !query && <Paginate />}
+    </>
   );
 };
 

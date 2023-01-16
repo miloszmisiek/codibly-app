@@ -9,6 +9,9 @@ export const fetchProductsData = () => {
   return async (dispatch: AppDispatch) => {
     const active = store.getState().products.active;
     const query = store.getState().products.query;
+
+    dispatch(productsActions.notLoaded());
+
     const fetchData = async () => {
       const response = await fetch(
         `https://reqres.in/api/products/?page=${
@@ -49,7 +52,6 @@ export const fetchProductsData = () => {
       );
       dispatch(productsActions.loaded());
     } catch (error) {
-      // console.log(error);
       dispatch(productsActions.responseNOT());
       dispatch(
         alertActions.setMessage(
@@ -97,6 +99,7 @@ export const fetchProductsOptions = () => {
           max: Math.max(...productData.data.map((o: Product) => o.id)),
         })
       );
+
     } catch (error) {
       console.log(error);
     }

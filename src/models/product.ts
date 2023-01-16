@@ -12,11 +12,11 @@ class Product {
     productColor: string,
     productPantoneValue: string
   ) {
-    (this.name = productName),
-      (this.id = productId),
-      (this.year = productYear),
-      (this.color = productColor),
-      (this.pantone_value = productPantoneValue);
+    this.name = productName;
+    this.id = productId;
+    this.year = productYear;
+    this.color = productColor;
+    this.pantone_value = productPantoneValue;
   }
 }
 

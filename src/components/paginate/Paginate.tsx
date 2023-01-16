@@ -1,14 +1,15 @@
-import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Pagination } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../store";
-import { productsActions } from "../../store/products-slice";
 import { MyPagination } from "./styles";
 
 const Paginate: React.FC = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const totalPages = useSelector(
@@ -21,10 +22,9 @@ const Paginate: React.FC = () => {
     pages.push(
       <Pagination.Item
         key={number}
-        active={number === active}
+        active={number === parseInt(active)}
         onClick={() => {
-          dispatch(productsActions.changeActive(number));
-          // navigate("/page/" + number);
+          navigate("/products/page/" + number);
         }}
       >
         {number}
@@ -35,23 +35,21 @@ const Paginate: React.FC = () => {
     <Col className="m-auto" sm={12}>
       <MyPagination>
         <Pagination.Prev
-          disabled={active <= 1}
+          disabled={parseInt(active) <= 1}
           onClick={() => {
-            if (active > 1) {
-              dispatch(productsActions.changeActive(active - 1));
-              // navigate("/page/" + (active - 1));
+            if (parseInt(active) > 1) {
+              navigate("/products/page/" + (parseInt(active) - 1));
             }
           }}
         >
-                    <FontAwesomeIcon icon={faChevronLeft} />
+          <FontAwesomeIcon icon={faChevronLeft} />
         </Pagination.Prev>
         {pages}
         <Pagination.Next
-          disabled={active >= totalPages}
+          disabled={parseInt(active) >= totalPages}
           onClick={() => {
-            if (active < totalPages) {
-              dispatch(productsActions.changeActive(active + 1));
-              // navigate("/page/" + (active + 1));
+            if (parseInt(active) < totalPages) {
+              navigate("/products/page/" + (parseInt(active) + 1));
             }
           }}
         >

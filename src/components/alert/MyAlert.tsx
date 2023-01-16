@@ -15,7 +15,7 @@ const MyAlert: React.FC = () => {
       // After 3 seconds set the show value to false
       dispatch(alertActions.handleClose());
     }, 3000);
-  }, []);
+  }, [dispatch]);
 
   return (
     <AlertCustom show={show} variant={variant}>
