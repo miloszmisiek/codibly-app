@@ -8,32 +8,15 @@ import {
   faMagnifyingGlass,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import ProductsTable from "./components/productsTable/ProductsTable";
-import Root from "./routes/root";
-import NotFound from "./components/notFound/NotFound";
+
+import App from "./App";
 
 library.add(faMagnifyingGlass, faChevronRight);
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root />,
-    errorElement: <NotFound />,
-    children: [
-      { path: "/products/page/:page", element: <ProductsTable /> },
-      { path: "/products/:id", element: <ProductsTable /> },
-    ],
-  },
-]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <App />
     </Provider>
   </React.StrictMode>
 );
