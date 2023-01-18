@@ -13,7 +13,7 @@
   - [ID Page Actions](#id-page-actions)
   - [Modal Actions](#modal-actions)
   - [URL functionality (desktop only)](#url-functionality-desktop-only)
-- [Credits](#credits)
+- [**Credits**](#credits)
 - [**Acknowledgments**](#acknowledgments)
 
 ## **Overview**
@@ -81,7 +81,7 @@ Open the app by navigating to **[this](https://main--benevolent-toffee-0f7aae.ne
 
 Users can change the display by typing valid URL parameters. If they are invalid, users will be redirected to the "Not Found" page.
 
-## Credits
+## **Credits**
 
 1. Not working icon comes from "https://www.pngitem.com/middle/hJwTimh_thumb-image-dead-face-transparent-hd-png-download/".
 2. 404 not found icon comes from "https://icon-library.com/".
