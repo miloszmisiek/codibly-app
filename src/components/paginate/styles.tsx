@@ -1,4 +1,4 @@
-import { Pagination } from "react-bootstrap";
+import Pagination from "react-bootstrap/Pagination";
 import styled from "styled-components";
 
 export const MyPagination = styled(Pagination)`

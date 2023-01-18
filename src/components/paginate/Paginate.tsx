@@ -1,23 +1,24 @@
+import Col from "react-bootstrap/Col";
+import Pagination from "react-bootstrap/Pagination";
 import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Col, Pagination } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../store";
 import { MyPagination } from "./styles";
 
 const Paginate: React.FC = () => {
-  const navigate = useNavigate();
+  let pages = [];
 
+  const navigate = useNavigate();
   const totalPages = useSelector(
     (state: RootState) => state.products.options.totalPages
   );
   const active = useSelector((state: RootState) => state.products.active);
 
-  let pages = [];
   for (let number = 1; number <= totalPages; number++) {
     pages.push(
       <Pagination.Item
@@ -31,6 +32,7 @@ const Paginate: React.FC = () => {
       </Pagination.Item>
     );
   }
+
   return (
     <Col className="m-auto" sm={12}>
       <MyPagination>

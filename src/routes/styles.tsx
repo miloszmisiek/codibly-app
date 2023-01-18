@@ -1,12 +1,10 @@
-import { Container } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
 import styled from "styled-components";
 
 export const MainContainer = styled(Container)`
   position: relative;
   background: rgba(247, 247, 249, 1);
   border-radius: 1rem;
-  /* height: 336px; */
-  /* max-width: 600px; */
   min-height: 500px;
   display: flex;
   justify-content: center;

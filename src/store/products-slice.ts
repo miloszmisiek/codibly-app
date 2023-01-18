@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Product from "../models/product";
 
-type ProductContextObj = {
+export type ProductContextObj = {
   items: Product[];
   active: string;
   query: string;

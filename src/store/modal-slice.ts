@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Product from "../models/product";
 
-type ModalContextObj = {
+export type ModalContextObj = {
   item: Product;
   show: boolean;
 };
 
-const initialModalState: ModalContextObj = {
+export const initialModalState: ModalContextObj = {
   item: {
     id: -1,
     name: "",

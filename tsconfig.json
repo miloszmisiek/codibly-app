@@ -16,7 +16,7 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"],
+  "include": ["src", "ProductsTable.testtt.tsx", "ProductsTable.testtt.tsx", "ProductsTable.testtt.tsx", "enzymeAdapter.d.ts", "enzymeAdapter.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }],
   "noImplicitSemicolons": true
   // "composite": true

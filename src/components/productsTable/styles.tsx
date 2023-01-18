@@ -115,14 +115,3 @@ export const ImageBorder = styled.div`
     padding: 2rem;
   }
 `;
-
-export const WrongMessage = styled.p`
-  font-family: "Caveat", cursive;
-  margin: 1rem auto;
-  font-size: 2rem;
-
-  @media screen and (max-width: 576px) {
-    font-size: 1.5rem;
-    text-align: center;
-  }
-`;

@@ -1,8 +1,7 @@
-import { Modal } from "react-bootstrap";
+import Modal from "react-bootstrap/Modal";
 import styled from "styled-components";
 
-export const ModalCustom = styled(Modal)`
-`;
+export const ModalCustom = styled(Modal)``;
 
 export const ModalHeader = styled(Modal.Header)`
   background-color: ${(props) => props.color} !important;

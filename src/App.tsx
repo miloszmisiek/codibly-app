@@ -3,7 +3,7 @@ import NotFound from "./components/notFound/NotFound";
 import ProductsTable from "./components/productsTable/ProductsTable";
 import Root from "./routes/root";
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
