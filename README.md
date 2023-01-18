@@ -4,9 +4,21 @@
 
 ## **Table of Contents**
 
+- [**Table of Contents**](#table-of-contents)
+- [**Overview**](#overview)
+  - [Production](#production)
+- [**Technologies Used**](#technologies-used)
+- [**How to use?**](#how-to-use)
+  - [Home Page Actions](#home-page-actions)
+  - [ID Page Actions](#id-page-actions)
+  - [Modal Actions](#modal-actions)
+  - [URL functionality (desktop only)](#url-functionality-desktop-only)
+- [Credits](#credits)
+- [**Acknowledgments**](#acknowledgments)
+
 ## **Overview**
 
-This project serves as a **Frontend Developer - Intern** recruitment task for [Codibly](https://codibly.com/). It is a simple web application for displaying items fetched from API Server in tabular format. The table is paginated to display five items. Users can click on a row to display item's details in modal.
+This project serves as a **Frontend Developer - Intern** recruitment task for [Codibly](https://codibly.com/). It is a simple web application for displaying items fetched from API Server in tabular format. The table is paginated to display five items. Users can click on a row to display the item's details in a modal.
 
 The app is fully responsive and was tested on different screen sizes.
 
@@ -67,7 +79,7 @@ Open the app by navigating to **[this](https://main--benevolent-toffee-0f7aae.ne
 
 ### URL functionality (desktop only)
 
-Users can change display by typing valid URL parameters. If they are invalid, users will be redirected to "Not Found" page.
+Users can change the display by typing valid URL parameters. If they are invalid, users will be redirected to the "Not Found" page.
 
 ## Credits
 
