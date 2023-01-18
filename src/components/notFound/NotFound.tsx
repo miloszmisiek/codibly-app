@@ -35,7 +35,7 @@ const NotFound: React.FC = () => {
   if (isRouteErrorResponse(error)) {
     return (
       <ColNF>
-        {error.status !== 404 ? (
+        {error.status === 404 ? (
           <>
             <img src={NotFoundImg} height="300" alt="Not Found"></img>
             <NotFoundMsg>
