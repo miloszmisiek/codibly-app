@@ -1,4 +1,4 @@
-# <div align='center'> Codibly App :clipboard:</div><!-- omit in toc -->
+# <div align='center'> Codibly App <img src="https://codibly.com/wp-content/uploads/2020/07/cropped-favi-cdlb-35x35.png"/></div><!-- omit in toc -->
 
 ## <img align="center" src="./src/assets/documentation/am-i-responsive.png" alt="Codibly App Am I Responsive" style="max-width='100%'"> <!-- omit in toc -->
 
@@ -54,6 +54,7 @@ API endpoint can be found [here](https://reqres.in/api/products/).
 Open the app by navigating to **[this](https://main--benevolent-toffee-0f7aae.netlify.app/)** page.
 
 ### Home Page Actions
+
 ![Home Actions](src/assets/documentation/home-page.png)
 
 ### ID Page Actions
@@ -78,7 +79,7 @@ Users can change display by typing valid URL parameters. If they are invalid, us
 
 ## **Acknowledgments**
 
-1. **[Codibly]((https://codibly.com/) Recruitment Team** - for giving me a chance to improve my skills by doing this task - regardless of the outcome it was a great experience for self-development. Thank you!
+1. **[Codibly]((<https://codibly.com/>) Recruitment Team** - for giving me a chance to improve my skills by doing this task - regardless of the outcome it was a great experience for self-development. Thank you!
 
 [Back to contents](#table-of-contents)
 
@@ -89,4 +90,3 @@ Users can change display by typing valid URL parameters. If they are invalid, us
         <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
     </a>
 </div>
-
