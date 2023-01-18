@@ -57,6 +57,7 @@ API endpoint can be found [here](https://reqres.in/api/products/).
   - [VSCode](https://code.visualstudio.com/): the IDE used to develop the website.
   - [Fontawesome](https://fontawesome.com/): was used to implement icons with animation.
   - [Grammarly](https://www.grammarly.com/): was used to check grammar and typo errors.
+  - [Yarn](https://yarnpkg.com/): package manager used for the project.
   - [eslint](https://eslint.org/): ESLint statically analyzes code to quickly find problems. Was used to check any linting errors and warning in the code.
 
 [Back to contents](#table-of-contents)
