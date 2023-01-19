@@ -92,7 +92,7 @@ Users can change the display by typing valid URL parameters. If they are invalid
 
 ## **Acknowledgments**
 
-1. **[Codibly]((<https://codibly.com/>) Recruitment Team** - for giving me a chance to improve my skills by doing this task - regardless of the outcome it was a great experience for self-development. Thank you!
+1. **[Codibly](https://codibly.com/>) Recruitment Team** - for giving me a chance to improve my skills by doing this task - regardless of the outcome it was a great experience for self-development. Thank you!
 
 [Back to contents](#table-of-contents)
 
