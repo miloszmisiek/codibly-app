@@ -6,6 +6,7 @@
 
 - [**Table of Contents**](#table-of-contents)
 - [**Overview**](#overview)
+  - [Development](#development)
   - [Production](#production)
 - [**Technologies Used**](#technologies-used)
 - [**How to use?**](#how-to-use)
@@ -21,6 +22,20 @@
 This project serves as a **Frontend Developer - Intern** recruitment task for [Codibly](https://codibly.com/). It is a simple web application for displaying items fetched from API Server in tabular format. The table is paginated to display five items. Users can click on a row to display the item's details in a modal.
 
 The app is fully responsive and was tested on different screen sizes.
+
+### Development
+
+To run the development server:
+
+1. Clone the repository to a local directory.
+2. Change the directory to 'codibly-app' `cd codibly app`.
+3. For **NPM Package Manager**
+   1. In the terminal type `npm install`
+   2. Once the installation of dependencies is completed, type `npm run dev`.
+4. For **Yarn Package Manager**:
+   1. In the terminal type `yarn install`.
+   2. Once the installation of dependencies is completed, type `yarn dev`
+5. The development server should start, click on the link in the terminal for **localhost**.
 
 ### Production
 
