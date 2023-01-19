@@ -28,7 +28,7 @@ The app is fully responsive and was tested on different screen sizes.
 To run the development server:
 
 1. Clone the repository to a local directory.
-2. Change the directory to 'codibly-app' `cd codibly app`.
+2. Change the directory to 'codibly-app' `cd codibly-app`.
 3. For **NPM Package Manager**
    1. In the terminal type `npm install`
    2. Once the installation of dependencies is completed, type `npm run dev`.
